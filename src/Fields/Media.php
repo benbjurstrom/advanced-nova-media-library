@@ -13,6 +13,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\FileAdder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Illuminate\Support\Facades\Log;
 
 class Media extends Field
 {
@@ -384,6 +385,8 @@ class Media extends Field
      */
     private function makeMediaFromVaporUpload(array $file, HasMedia $model): FileAdder
     {
+        Log::info(var_dump($file));
+        
         $disk = config('filesystems.default');
 
         $disk = config('filesystems.disks.' . $disk . 'driver') === 's3' ? $disk : 's3';
